@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "workflow_id": "tutorial_associate_crop_infer",
+  "name": "教学：双模型关联与裁剪",
+  "description": "虚构仓储示例；导入前先在模型库登记同名本机模型",
+  "nodes": [
+    {"type": "source_video", "name": "媒体输入", "enabled": true, "params": {"fps": 1.0}},
+    {"type": "inference", "name": "主体检测", "enabled": true, "params": {"model_key": "subject", "model": {"name": "package_detector"}}},
+    {"type": "inference", "name": "候选检测", "enabled": true, "params": {"model_key": "candidate", "model": {"name": "marker_detector"}}},
+    {"type": "generic_associate", "name": "空间关联", "enabled": true, "params": {
+      "left_key": "subject", "right_key": "candidate", "left_classes": "package,crate",
+      "right_classes": "label,seal,tag", "metric": "center_inside", "threshold": 1.0,
+      "expand_ratio": 0.05, "min_subject_area": 0, "min_candidate_score": 0.25
+    }},
+    {"type": "crop", "name": "裁剪命中主体", "enabled": true, "params": {"subject_mode": "associated", "expand_ratio": 0.1, "min_area": 0}},
+    {"type": "crop_inference", "name": "裁剪图分类", "enabled": true, "params": {"route": "all", "model": {"name": "detail_classifier"}}},
+    {"type": "draw", "name": "结果预览", "enabled": true, "params": {"show_keypoints": true}}
+  ]
+}

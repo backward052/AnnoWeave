@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Build outputs
+build/
+dist/
+*.spec.local
+
+# Editors and operating systems
+.idea/
+.vscode/
+.vs/
+.DS_Store
+Thumbs.db
+
+# Local runtime state and confidential assets
+/config/
+/workflows/
+/sessions/
+/projects/
+/logs/
+/outputs/
+/exports/
+/datasets/
+/models/
+/weights/
+*.db
+*.sqlite*
+*.log
+*.onnx
+*.pt
+*.pth
+*.engine
+*.plan
+*.bin
+*.trt
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12

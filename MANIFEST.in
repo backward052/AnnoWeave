@@ -1,0 +1,15 @@
+recursive-include src/annoweave/assets *.svg *.png *.ico *.md
+include README.md README_zh-CN.md
+include CHANGELOG.md
+include LICENSE
+
+# The public repository boundary and its checks ship with the source distribution so a
+# downstream packager can re-verify the same rules.
+recursive-include scripts *.ps1
+recursive-include tests *.py
+
+prune build
+prune dist
+prune .venv
+global-exclude *.py[cod]
+global-exclude __pycache__

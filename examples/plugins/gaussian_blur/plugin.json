@@ -1,0 +1,15 @@
+{
+  "id": "com.annoweave.example.blur",
+  "name": "Example Gaussian blur node",
+  "version": "1.0.0",
+  "kind": "node",
+  "entry": "plugin.py",
+  "description": "A neutral frame-processing example with no model or business configuration.",
+  "capabilities": ["frame.blur"],
+  "param_schema": {"kernel": {"label": "Kernel size", "type": "int", "default": 5}},
+  "requires": [],
+  "data_version": 1,
+  "protocol_version": 1,
+  "resources": {"cpu": "low"},
+  "healthcheck": "healthcheck"
+}

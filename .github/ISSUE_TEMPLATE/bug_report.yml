@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible AnnoWeave problem without private data
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach customer media, model weights, production workflows, credentials, or local database files.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.3.0
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation
+      options: [Source, CPU executable, GPU executable]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use invented filenames, classes, and workflow values.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true

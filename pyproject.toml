@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "annoweave"
+version = "0.3.0"
+description = "Local visual AI inference, annotation, review, and composable workflows"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "AnnoWeave Contributors"}]
+keywords = ["annotation", "computer-vision", "onnx", "video", "workflow", "review"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: Science/Research",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+  "PySide6>=6.8,<6.9",
+  "numpy>=1.24,<3",
+  "opencv-contrib-python-headless>=4.8,<5",
+]
+
+[project.urls]
+Repository = "https://github.com/backward052/AnnoWeave"
+Issues = "https://github.com/backward052/AnnoWeave/issues"
+Changelog = "https://github.com/backward052/AnnoWeave/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+cpu = ["onnxruntime>=1.17,<2"]
+gpu = ["onnxruntime-gpu>=1.17,<2"]
+build = ["pyinstaller>=6,<7"]
+dev = ["pytest>=8,<9", "ruff>=0.9"]
+
+[project.scripts]
+annoweave = "annoweave.app:run"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+annoweave = ["assets/*.svg", "assets/*.png", "assets/*.ico", "assets/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
