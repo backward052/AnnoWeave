@@ -20,7 +20,7 @@
 ```powershell
 .\scripts\check-release.ps1
 python -m pytest
-python -m ruff check src tests
+python -m ruff check src tests tools
 git status --short
 git ls-files
 ```

@@ -1,0 +1,30 @@
+{
+  "digest": "c7d8e2f977ec2871ed139c7c690baaddc55625e968b52af5534f2035033140b0",
+  "assets": [
+    {
+      "file": "workflow-associate-crop.gif",
+      "width": 1000,
+      "height": 504,
+      "rendered_frames": 55,
+      "encoded_frames": 24,
+      "bytes": 1979442,
+      "association_pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "matched_subjects": [
+        0,
+        1
+      ],
+      "rejected_candidates": [
+        2
+      ]
+    }
+  ]
+}

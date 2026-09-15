@@ -3,6 +3,10 @@ include README.md README_zh-CN.md
 include CHANGELOG.md
 include LICENSE
 
+# The README demo animation (~2 MB) lives in the repository for GitHub to render but is
+# deliberately kept out of the source distribution: an sdist consumer does not need it.
+prune docs/assets
+
 # The public repository boundary and its checks ship with the source distribution so a
 # downstream packager can re-verify the same rules.
 recursive-include scripts *.ps1

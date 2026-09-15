@@ -10,6 +10,14 @@ AnnoWeave 将图片与视频采样、多模型推理、对象空间关联、证�
 
 仓库不附带任何模型权重。首次启动时模型库与工作流都是空的，这是有意设计的：你指向自己的本地 ONNX 模型。
 
+## 工作方式
+
+![AnnoWeave 工作流：检测 → 关联 → 裁剪 → 下游](docs/assets/workflow-associate-crop.gif)
+
+两个整图模型在同一帧上推理，空间规则判定每个标记属于哪个容器，只裁剪命中的容器，再由分类模型对每张裁剪图打分。每一步都是一个节点、每个节点都可替换；第三步的归属判定来自**真实的关联节点**，第四步会明显跳过没有命中任何标记的容器。
+
+该动画由 [`tools/make_demo_gifs.py`](tools/make_demo_gifs.py) 以程序化几何生成 —— 不含真实素材、不含模型权重 —— 因此可复现，而不是一个无法维护的手工二进制文件。
+
 ## 主要能力
 
 - 打开单张图片、多个文件或文件夹，统一复核图片与视频采样帧。
@@ -103,6 +111,7 @@ annoweave
 AnnoWeave/
 ├─ .github/                 # CI 与问题模板
 ├─ docs/                    # 中英文使用与构建文档
+│  └─ assets/               # README 演示动画（由脚本生成）
 ├─ examples/
 │  ├─ plugins/              # 无业务含义的插件示例
 │  └─ workflows/            # 通用教学工作流
@@ -110,6 +119,7 @@ AnnoWeave/
 ├─ scripts/                 # 环境安装、运行、构建、发布前检查
 ├─ src/annoweave/           # 应用源码
 ├─ tests/                   # 公共行为与发布边界检查
+├─ tools/                   # 维护者工具（演示动画生成器）
 ├─ pyproject.toml           # 依赖、入口和工具配置
 ├─ README.md
 └─ README_zh-CN.md
@@ -146,6 +156,13 @@ git status --short
 ```
 
 该脚本以 Git 索引为准，只检查真正会被推送的文件，因此不会被本机 `.venv`、`build`、`dist` 干扰。详细清单见[发布检查](docs/zh-CN/release-checklist.md)。
+
+## 致谢与引用
+
+AnnoWeave 不是下列项目的分支，也没有与之共享任何代码或素材。列出它们是因为它们影响了本项目的设计，或与本项目互补；其中**没有复制任何内容** —— 尤其 X-AnyLabeling 是 GPL-3.0，所以本项目不内联它的任何东西。
+
+- **[VideoPipe](https://github.com/sherlockchou86/VideoPipe)**（Apache-2.0）—— 基于离散推理节点构建的跨平台视频结构化框架。“每个模块只做一件事、节点之间通过明确的数据键连接”这一思路正是 AnnoWeave 节点图的来源，通用三模型教程也沿用这套表述。
+- **[X-AnyLabeling](https://github.com/CVHub520/X-AnyLabeling)**（GPL-3.0）—— 桌面标注工具，模型库丰富、导出格式多。需要**生产**数据集时用它；需要**运行并复核**多模型流水线、追溯每个结果来源时用 AnnoWeave。
 
 ## 状态与许可
 

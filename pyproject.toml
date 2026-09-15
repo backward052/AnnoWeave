@@ -40,7 +40,7 @@ Changelog = "https://github.com/backward052/AnnoWeave/blob/main/CHANGELOG.md"
 cpu = ["onnxruntime>=1.17,<2"]
 gpu = ["onnxruntime-gpu>=1.17,<2"]
 build = ["pyinstaller>=6,<7"]
-dev = ["pytest>=8,<9", "ruff>=0.9"]
+dev = ["pytest>=8,<9", "ruff>=0.9", "Pillow>=10"]
 
 [project.scripts]
 annoweave = "annoweave.app:run"

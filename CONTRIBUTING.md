@@ -15,7 +15,7 @@ cd AnnoWeave
 ```powershell
 .\scripts\check-release.ps1
 .\.venv\Scripts\python.exe -m pytest
-.\.venv\Scripts\python.exe -m ruff check src tests
+.\.venv\Scripts\python.exe -m ruff check src tests tools
 ```
 
 All three must pass; CI runs the same commands on Python 3.10, 3.12, and 3.13.
@@ -23,6 +23,19 @@ All three must pass; CI runs the same commands on Python 3.10, 3.12, and 3.13.
 Keep pull requests focused, and describe the user-visible behavior, how you validated it, and any compatibility limit. Add or update a test whenever you change behavior.
 
 Set `QT_QPA_PLATFORM=offscreen` to run the UI tests without a visible window.
+
+## README demo animation
+
+`docs/assets/workflow-associate-crop.gif` is generated, not hand-made:
+
+```powershell
+.\.venv\Scripts\python.exe tools\make_demo_gifs.py
+```
+
+If you change a node, the association rule, or the demo scene, rerun that command and commit
+both the GIF and `docs/assets/demo.json`. `tests/test_demo_assets.py` fails when they are out of
+date, so a stale animation cannot ship. The generator draws procedurally — never add real
+footage or model weights to it.
 
 ## Code style
 
