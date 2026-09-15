@@ -103,6 +103,11 @@ foreach ($sdist in $sdists) {
     if (-not ($entries | Where-Object { $_ -match 'annoweave/assets/annoweave\.ico$' })) {
         Stop-Check "$($sdist.Name) is missing the packaged brand assets. Check MANIFEST.in."
     }
+    # The README animation is ~2 MB and exists only for GitHub to render. MANIFEST.in prunes
+    # docs/assets; confirm that prune still holds so the sdist does not silently grow.
+    if ($entries | Where-Object { $_ -match 'docs/assets/.*\.gif$' }) {
+        Stop-Check "$($sdist.Name) bundles the README demo animation. MANIFEST.in should keep pruning docs/assets."
+    }
     Write-Host "  OK: $($entries.Count) entries, license and assets present" -ForegroundColor Green
 }
 
